@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .icon {
+        @apply hidden h-6 w-6 md:inline-flex cursor-pointer hover:scale-110 transition-all ease-in-out duration-150;
+    }
+    .btn {
+        @apply h-7 w-7 cursor-pointer hover:scale-110 transition-all ease-in-out duration-150;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #4d4d4d;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(10, 10, 10);
+}
