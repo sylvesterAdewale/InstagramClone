@@ -10,13 +10,17 @@ import {
 } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useRecoilState } from 'recoil'
+import { modalState } from '../atoms/ModalAtoms'
+import Modal from './Modal'
 
 const Header = () => {
     const { data: session } = useSession();
+    const [open, setOpen] = useRecoilState(modalState)
     const router = useRouter();
 
     return (
-        <div className="bg-white border-b shadow-sm p-2 sticky top-0 z-50">
+        <div className="bg-white border-b shadow-sm p-2 sticky top-0 z-30">
             <div className="flex items-center md:mx-auto md:max-w-3xl xl:max-w-5xl justify-between text-black">
                 <div onClick={() => {router.push("/")}} className="flex items-center cursor-pointer">
                     <Image src="/Instlogo.png" width={103} height={29} />
@@ -34,9 +38,9 @@ const Header = () => {
                         <>
                             <div className="relative icon">
                                 <span className="absolute -top-1 z-20 -right-1 text-xs font-medium w-4 h-4 text-center bg-red-500 text-white rounded-full animate-pulse">3</span>
-                                <PaperAirplaneIcon className="icon rotate-45" />
+                                <PaperAirplaneIcon onClick={() => router.push("/messages")} className="icon rotate-45" />
                             </div>
-                            <PlusCircleIcon className="icon" />
+                            <PlusCircleIcon onClick={() => setOpen(true)} className="icon" />
                             <UserGroupIcon className="icon" />
                             <HeartIcon className="icon" />
                             <div className="cursor-pointer">
@@ -48,6 +52,7 @@ const Header = () => {
                     )}
                 </div>
             </div>
+            <Modal />
         </div>
     )
 }
