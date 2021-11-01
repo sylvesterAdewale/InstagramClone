@@ -15,7 +15,6 @@ function Posts() {
     const [posts, setPosts] = useState();
     const videoRef = useRef();
     const [play, setPlay] = useState(true)
-    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const unsubscribe = onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), snapshot => {
@@ -23,20 +22,19 @@ function Posts() {
         })
         
         return () => {
-            setLoading(false);
             unsubscribe();
         };
     }, [db])
-    console.log(loading)
-
     function togglePlay() {
-        if (videoRef.current.paused || videoRef.current.ended) {
-            videoRef.current.play()
-            setPlay(false)
-        } else {
-            videoRef.current.pause()
-            setPlay(true)
-        }
+        document.querySelectorAll(".vid")?.forEach(_ => {
+            if (videoRef.current.paused || videoRef.current.ended) {
+                videoRef.current.play()
+                setPlay(false)
+            } else {
+                videoRef.current.pause()
+                setPlay(true)
+            }
+        })
     }
 
     return (
@@ -52,7 +50,7 @@ function Posts() {
                     {post.data().video && 
                     <div onClick={togglePlay} className="relative bg-black flex flex-col items-center justify-center">
                         <PlayIcon className={`text-white opacity-0 z-50 h-28 absolute transition-all duration-300 ${play && "opacity-80"} `} />
-                        <video ref={videoRef} className="object-contain">
+                        <video ref={videoRef} className="vid object-contain">
                             <source src={post.data().video} />
                         </video>
                     </div>
