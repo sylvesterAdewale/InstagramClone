@@ -30,7 +30,7 @@ function Modal() {
         const imageRef = ref(storage, `posts/${docRef.id}/image`);
         if (preImg) {
             await uploadString(imageRef, preImg, "data_url").then( async snapshot => {
-                const downloadUrl = await getDownloadURL(fileRef)
+                const downloadUrl = await getDownloadURL(imageRef)
     
                 await updateDoc(doc(db, "posts", docRef.id), {
                     image: downloadUrl,
@@ -40,7 +40,7 @@ function Modal() {
         const videoRef = ref(storage, `posts/${docRef.id}/video`);
         if (preVid) {
             await uploadString(videoRef, preVid, "data_url").then(async snapshot => {
-                const downloadUrl = await getDownloadURL(fileRef)
+                const downloadUrl = await getDownloadURL(videoRef)
     
                 await updateDoc(doc(db, "posts", docRef.id), {
                     video: downloadUrl,

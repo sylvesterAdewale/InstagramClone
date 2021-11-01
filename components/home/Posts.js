@@ -26,15 +26,13 @@ function Posts() {
         };
     }, [db])
     function togglePlay() {
-        document.querySelectorAll(".vid")?.forEach(_ => {
-            if (videoRef.current.paused || videoRef.current.ended) {
-                videoRef.current.play()
-                setPlay(false)
-            } else {
-                videoRef.current.pause()
-                setPlay(true)
-            }
-        })
+        if (videoRef.current.paused || videoRef.current.ended) {
+            videoRef.current.play()
+            setPlay(false)
+        } else {
+            videoRef.current.pause()
+            setPlay(true)
+        }
     }
 
     return (
