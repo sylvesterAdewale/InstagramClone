@@ -2,10 +2,8 @@ import Head from 'next/head'
 import Feeds from '../components/home/Feeds'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
-import Modal from '../components/Modal'
 import { useRecoilState } from "recoil"
 import { modalState } from "../atoms/ModalAtoms"
-import Preloader from '../components/Preloader'
 
 export default function Home() {
   const [open, setOpen] = useRecoilState(modalState);
@@ -19,9 +17,7 @@ export default function Home() {
       </Head>
       <Loader />
       <Header />
-      <Preloader />
       <Feeds />
-      {/* <Modal /> */}
     </div>
   )
 }
