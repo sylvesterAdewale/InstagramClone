@@ -87,7 +87,10 @@ const Post = ({id, username, userImg, caption, image}) => {
                 <BookmarkIcon className="btn" />
             </div>)}
             {/* captions */}
-            <p className="p-4 truncate">
+            <p className="pt-1 p-4 truncate">
+                {likes.length > 0 && (
+                    <p className="text-sm font-medium pb-2">{likes.length} likes</p>
+                )}
                 <span className="font-bold mr-2">{username} </span>{caption}
             </p>
             {/* comments */}
