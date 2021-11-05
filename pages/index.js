@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Loader from '../components/Loader'
 import { useRecoilState } from "recoil"
 import { modalState } from "../atoms/ModalAtoms"
+import Modal from '../components/Modal'
 
 export default function Home() {
   const [open, setOpen] = useRecoilState(modalState);
@@ -18,6 +19,7 @@ export default function Home() {
       <Loader />
       <Header />
       <Feeds />
+      <Modal />
     </div>
   )
 }

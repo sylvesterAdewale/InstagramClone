@@ -12,7 +12,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
 import { modalState } from '../atoms/ModalAtoms'
-import Modal from './Modal'
+// import Modal from './Modal'
 
 const Header = () => {
     const { data: session } = useSession();
@@ -38,7 +38,7 @@ const Header = () => {
                         <>
                             <div className="relative icon">
                                 <span className="absolute -top-1 z-20 -right-1 text-xs font-medium w-4 h-4 text-center bg-red-500 text-white rounded-full animate-pulse">3</span>
-                                <PaperAirplaneIcon onClick={() => router.push("/messages")} className="icon rotate-45" />
+                                <PaperAirplaneIcon className="icon rotate-45" />
                             </div>
                             <PlusCircleIcon onClick={() => setOpen(true)} className="icon" />
                             <UserGroupIcon className="icon" />
@@ -52,7 +52,7 @@ const Header = () => {
                     )}
                 </div>
             </div>
-            <Modal />
+            {/* <Modal /> */}
         </div>
     )
 }
