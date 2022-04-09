@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import {
     BookmarkIcon,
-    DotsHorizontalIcon,
     ChatIcon,
     HeartIcon,
     EmojiHappyIcon,
-    PaperAirplaneIcon
+    PaperAirplaneIcon,
+    TrashIcon
 } from '@heroicons/react/outline'
 import { HeartIcon as HeartFilledIcon} from '@heroicons/react/solid'
 import { useSession } from 'next-auth/react';
@@ -42,6 +42,7 @@ const Post = ({id, username, userImg, caption, image}) => {
     useEffect(() => {
         setHasLiked(likes.findIndex((like) => (like.id === session?.user?.uid)) !== -1)
     }, [likes])
+
     const likePost = async () => {
         if (hasLiked) {
             await deleteDoc(doc(db, "posts", id, "likes", session.user.uid))
@@ -49,6 +50,11 @@ const Post = ({id, username, userImg, caption, image}) => {
             await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
                 username: session.user.username,
             })
+        }
+    }
+    const deletePost = async () => {
+        if ( session ) {
+            await deleteDoc(doc(db, "posts", id))
         }
     }
     const sendComment = async (e) => {
@@ -69,7 +75,7 @@ const Post = ({id, username, userImg, caption, image}) => {
             <div className="flex items-center p-4">
                 <img className="h-12 mr-3 p-1 w-12 rounded-full object-cover" src={userImg} alt="" />
                 <p className="font-bold flex-1">{username}</p>
-                <DotsHorizontalIcon className="h-5 w-5 cursor-pointer" />
+                <TrashIcon onClick={deletePost} className="h-5 w-5 cursor-pointer" />
             </div> 
             {image && 
             <img src={image} className="object-cover w-full" alt="" />}
@@ -87,12 +93,12 @@ const Post = ({id, username, userImg, caption, image}) => {
                 <BookmarkIcon className="btn" />
             </div>)}
             {/* captions */}
-            <p className="pt-1 p-4 truncate">
+            <div className="pt-1 p-4 truncate">
                 {likes.length > 0 && (
                     <p className="text-sm font-medium pb-2">{likes.length} likes</p>
                 )}
                 <span className="font-bold mr-2">{username} </span>{caption}
-            </p>
+            </div>
             {/* comments */}
             {comments.length > 0 && (
                 <div className="m-4 ml-10 max-h-20 overflow-y-auto mt-1 space-y-2">

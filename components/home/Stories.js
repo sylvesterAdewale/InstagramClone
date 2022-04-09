@@ -1,4 +1,4 @@
-import faker from 'faker'
+import { faker } from '@faker-js/faker';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react'
 
@@ -8,7 +8,8 @@ const Stories = () => {
 
     useEffect(() => {
         const suggestions = [...Array(20)].map((_, i) => ({
-            ...faker.helpers.contextualCard(),
+            name: faker.name.findName(),
+            avatar: faker.image.avatar(),
             id: i
         }));
         SetSuggestions(suggestions)
@@ -25,7 +26,7 @@ const Stories = () => {
             {suggestions.map(profile => (
                 <div key={profile.id}>
                     <img src={profile.avatar} alt="" className="rounded-full object-contain h-14 w-14 p-[1.5px] border-2 border-red-500 transition-all hover:scale-110 duration-200 ease-in-out cursor-pointer" />
-                    <p className="w-14 text-xs text-center truncate">{profile.username}</p>
+                    <p className="w-14 text-xs text-center truncate">{profile.name}</p>
                 </div>
             ))}
         </div>

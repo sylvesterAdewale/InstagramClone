@@ -1,7 +1,5 @@
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from '@firebase/firestore';
-import { HeartIcon as HeartFilledIcon} from '@heroicons/react/solid'
-import { useSession } from 'next-auth/react';
-import { useEffect, useRef, useState } from 'react'
+import { collection, onSnapshot, orderBy, query } from '@firebase/firestore';
+import { useEffect, useState } from 'react'
 import { db } from '../../firebase';
 import Post from './Post';
 
@@ -13,6 +11,7 @@ function Posts() {
             setPosts(snapshot.docs)
         })
         
+        console.log(posts)
         return () => {
             unsubscribe();
         };
